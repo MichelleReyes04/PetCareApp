@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head> <meta charset="UTF-8"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <title>PetCareApp</title> 
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <link href="https://fonts.googleapis.com/css2?family=Peralta&display=swap" rel="stylesheet">
+     </head>
+<body>
+    <div class = "container"> <!-- Container which contains the prompt and response-->
+        <br>
+        <br>
+        <div class = "box_one">
+            
+             <div class = "title" > PET PLAN </div>
+            </div>
+       
+        <div class = "direction">
+                  
+            <h3>How it works:</h3> 
+           
+             <b>Describe your pet and their needs: </b>Write a description of your pet and any other relevant information. 
+             <br>
+             <br>
+             <b>Choose a Plan Type: </b> Select the checkbox for the type of plan you want.
+             <ul>
+             <li>Feeding</li>
+             <li>Grooming</li>
+             <li>Training</li>
+             <li>General Care (Leave all checkboxes empty)</li> 
+             </ul>
+    
+             <b>Generate the Plan: </b>Press on the "Generate" button to recieve a customized weekly schedule based on your pet's needs.
+            
+    </div>
+ <br>
+ <br>
+        <div class = "container2">
+            <br>
+            <br>
+
+            <form id="petStatus"> <!--ID/info for each request-->
+                <label for="petInfo"><div class = "starter">Enter Here:</div></label> 
+            
+                <br>
+                <!--Prompt User for response-->
+                <div class = "box"><textarea id="petInfo" rows="10" cols="50" placeholder="E.g., I have a dog who is a mixed Husky and she broke her leg, can you create a week schedule for her?"></textarea></div>
+                <br>
+                
+                <div class = "button-container">
+                    <input type="checkbox" id="feeding_checkbox" name="feeding" />
+                    <label for="feeding">Feeding</label>
+                    <input type="checkbox" id="groomimg_checkbox" name="grooming"/>
+                    <label for="grooming">Grooming</label>
+                    <input type="checkbox" id="training_checkbox" name="training"/>
+                    <label for="training">Training</label>
+
+                  </div>
+            
+            <br>
+                <br>
+                <!--Press button to submit the response to the GPT-->
+                <div class = "button" ><button type="submit">Generate</button></div>
+            </form>
+        
+
+            <h2>Pet Care Plan: </h2>
+            <br>
+            <!--Response-->
+            <div class="responseAnswer"> 
+                <button id="openModalBtn" style="display:none;">Open for Answer</button>
+                <pre id="response"></pre>
+            </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <!--Clear Button-->
+         
+
+            <div class = "clearbutton">
+                <button type = "button" id = "clearBtn">Clear</button>
+            </div>
+        </div>
+
+    </div>
+    <!--Modal Interface for response-->
+    
+    <div id = "myModal" class="modal">
+        <div class = "modal-content">
+            <span class = "close">&times;</span>
+            <pre id = "modalResponse"></pre>
+        </div>
+    </div>
+
+
+
+
+
+
+    <script>
+        //modal 
+        const modal = document.getElementById("myModal"); 
+        const openModalBtn = document.getElementById("openModalBtn"); 
+        const closeModalBtn = document.getElementsByClassName("close")[0]; 
+        const modalResponse = document.getElementById("modalResponse"); 
+        const responseAns = document.getElementById('response'); 
+        
+        // Opens the modal when clicked
+        openModalBtn.onclick = function() 
+         { modal.style.display = "block"; 
+         
+        }; 
+
+        // Closes the modal when clicked
+        closeModalBtn.onclick = function() 
+        { modal.style.display = "none"; 
+
+        }; 
+
+        // Closes the modal when clicking anywhere outside the modal contact area.
+        window.onclick = function(event) {
+             if (event.target == modal) //modal --> checks if the click happened on the entire modal element, which means it likely happened on the background if the 'modal content' itself didn't intercept the clic.
+             { modal.style.display = "none"; } 
+            };
+
+        //form which then the user will submit
+        document.getElementById('petStatus').addEventListener('submit', async (e) => {
+            e.preventDefault(); //prevents the default form submission behavior (reloading)
+
+            const petInfo = document.getElementById('petInfo').value; //retrieves the value entered in the textarea with the ID 'petInfo'
+            const responseAns = document.getElementById('response'); // the response
+            const feedingChecked = document.getElementById('feeding_checkbox').checked;
+            const groomingChecked = document.getElementById('groomimg_checkbox').checked;
+            const trainingChecked = document.getElementById('training_checkbox').checked;
+
+
+            responseAns.textContent = "Generating a Pet Plan ......";
+
+            try { //gets the response from the GPT 
+                const response = await fetch('/generate-care-plan', {
+                    method: 'POST', // sends an asynchronous 'POST' request to the '/generate-care-plan' endpoint
+                    headers: {
+                        'Content-Type': 'application/json', //sets the request header to indicate that the payload is JSON.
+                    },
+
+             body: JSON.stringify({ petInfo, feeding: feedingChecked, grooming:groomingChecked, training: trainingChecked}) //converts to a JSON string and sends it as the request body.
+                });
+
+                const data = await response.json(); //parses the JSON response from the server.
+                modalResponse.textContent= data.generatedPlan; //updates the 'modalResponse' element w/ generated pet plan from the server response (helper.py) 
+                //return jsonify({"generatedPlan": generated_plan})
+                
+                //Makes the button to open the modal visible
+                openModalBtn.style.display = "block";
+            } catch (error) {
+                modalResponse.textContent = "Error generating care plan.";
+                console.error(error);
+            }
+        });
+
+
+
+        const clearBtn = document.getElementById("clearBtn");
+
+        clearBtn.addEventListener("click", function(){
+            location.reload(); //reload the page
+        });
+    </script>
+</body>
+</html>
