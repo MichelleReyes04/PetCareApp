@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_cost.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Peralta&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="navbar">
+        <div class="title">
+            <span>Pet Care</span>
+            <img src="/static/AdobeStock_532811302.png" alt="Title Image" width="20" height="20">
+        </div>
+        <div class="Links">
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('index') }}">Pet Plan</a></li>
+                <li><a href="{{ url_for('about') }}">About</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <br><br><br><br><br><br><br><br>
+    <div class="container"> <!-- Container which contains the prompt and response-->
+        <div class="box_one">
+            <div class="title">Care Cost Support</div>
+            <br>
+        
+
+        <div class="direction">
+            <h3>How it works:</h3> 
+            <b>Describe your pet and their financial needs:</b> Write a description of your pet and any other relevant financial information.
+            <br><br>
+            <b>Write your zip code:</b> Enter your zip code to locate local aid and support.
+            <br><br>
+            <b>Generate the Plan:</b> Press the "Generate" button to receive a list of local aid and support.
+        </div>
+    </div>
+
+        <br><br><br>
+        <br><br><br>
+        <div class="container2">
+            <br><br>
+            <form id="petFinanicalStatus"> <!--ID/info for each request-->
+                
+                <label for="petInfoFin"><div class="starter">Enter Here:</div></label>
+                <br>
+                <!--Prompt User for response-->
+                <div class="box">
+                    <textarea id="petInfoFin" rows="10" cols="50" placeholder="E.g., I have a dog who is a mixed Husky and she broke her leg."></textarea>
+                </div>
+                <br>
+                <div class="button-container">
+                    <label for="zip"><b>Enter your zip code:</b></label>
+                    <input type="text" id="zip" name="zip" pattern="\d{5}" maxlength="5" required>
+                </div>
+                <br><br>
+                <!--Press button to submit the response to the GPT-->
+                <div class="button"><button type="submit">Generate</button></div>
+            </form>
+
+            <h2>Pet Care Plan:</h2>
+            <br>
+            <!--Response-->
+            <div class="responseAnswerTwo">
+                <button id="openModalBtn" style="display:none;">Open for Answer</button>
+                <pre id="responsetwo"></pre>
+            </div>
+        <br><br>
+            <!--Clear Button-->
+            <div class="clearbutton">
+                <button type="button" id="clearBtn">Clear</button>
+            </div>
+            
+        </div>
+        <br><br>
+    </div>
+
+    <br>
+    <!--Modal Interface for response-->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <pre id="modalResponse"></pre>
+        </div>
+    </div>
+
+    <script>
+        // Modal functionality
+        const modal = document.getElementById("myModal"); 
+        const openModalBtn = document.getElementById("openModalBtn"); 
+        const closeModalBtn = document.getElementsByClassName("close")[0]; 
+        const modalResponse = document.getElementById("modalResponse"); 
+        const responseAns = document.getElementById('responsetwo'); 
+        
+        // Opens the modal when clicked
+        openModalBtn.onclick = function() {
+            modal.style.display = "block"; 
+        }; 
+
+        // Closes the modal when clicked
+        closeModalBtn.onclick = function() {
+            modal.style.display = "none"; 
+        }; 
+
+        // Closes the modal when clicking anywhere outside the modal contact area
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            } 
+        };
+
+        // Form submission handler
+        document.getElementById('petFinanicalStatus').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const petFin = document.getElementById('petInfoFin').value;
+            const responseAwstwo = document.getElementById('responsetwo');
+            const zipcode = document.getElementById('zip').value;
+
+            responseAwstwo.textContent = "Generating a Pet Finance Plan...";
+
+            try {
+                const responset = await fetch('/generate-fin-plan', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ petFin, zipcode })
+                });
+
+                const datatwo = await responset.json();
+                modalResponse.textContent = datatwo.generatedplantwo;
+
+                openModalBtn.style.display = "block";     
+            } catch(error) {
+                modalResponse.textContent = "Error generating care plan.";
+                console.error(error);
+            }
+        });
+
+        // Clear button functionality
+        const clearBtn = document.getElementById("clearBtn");
+        clearBtn.addEventListener("click", function() {
+            location.reload(); // Reload the page
+        });
+    </script>
+</body>
+</html>

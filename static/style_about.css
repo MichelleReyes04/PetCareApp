@@ -1,0 +1,123 @@
+
+body {
+    position: relative;
+    height: 100vh;  /* Ensures the body takes full viewport height */
+    margin: 0;      /* Removes default body margins */
+    overflow: auto; /* Prevents scrollbars from appearing due to pseudo-element positioning */
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("AdobeStock_187577407.jpeg"); /* Make sure this path is correct relative to the CSS file */
+    background-size: cover;    /* Ensures the image covers the entire background */
+    background-position: center; /* Centers the background image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    background-attachment: fixed; /* Makes the background image stay fixed when scrolling */
+    filter: opacity(75%);  /* Adjust this value to set your desired opacity */
+    z-index: -1;   /* Ensures the background image is behind all other content */
+}
+
+  
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 60px;
+    background-color:#00003d       ; /* Complementing warm tones */
+    color: #eceaea; 
+    height: 50px;
+    
+}
+ 
+.navbar .title {
+    display: flex;           /* Enables Flexbox */
+    align-items: center;     /* Vertically aligns the text and image */  
+    font-family: DynaPuff, cursive;
+             /* Adds space between the text and image */
+  }
+  
+  /* Text styling */
+.navbar .title span {
+    font-size: 45px;         /* Sets the font size to 50px */
+         /* Optional: makes the text bold */
+  }
+  
+  /* Image styling */
+.navbar .title img {
+    width: 36px;             /* Adjust image width */
+    height: 36px; 
+    padding-left: 10px;           /* Adjust image height */
+  }
+
+.navbar .Links{
+    display: flex;
+    align-items: center;
+}
+
+.navbar .Links ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display:flex;
+}
+
+.navbar .Links ul li{
+    margin-left: 30px;
+}
+
+.navbar .Links ul li a{
+    color:rgb(255, 255, 255);
+    text-decoration: none;
+    font-size: 21px;
+    cursor:pointer;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+.navbar .Links ul li a:hover{
+    text-decoration: underline;
+    color: #f1c40f;
+}
+
+.about_container{
+    padding-left: 300px;
+    padding-right: 300px;
+    background: rgba(0, 0, 0, 0.4); /* Black with 40% opacity */
+   border-radius: 8px;
+   margin-left: 200px;
+   margin-right: 200px;
+   margin-top: 90px;
+    
+}
+
+
+.about_title{
+    font-size: 70px;
+    text-align: center;
+    color:white;
+    font-family: DynaPuff, cursive;
+    font-size: 3.5em;
+    font-weight: bold;
+    letter-spacing: 2px;
+    
+}
+
+.about_summary span{
+    font-size: 20px;
+    text-align: center;
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.2em;
+    line-height: 1.6;
+}
+
+.borded-image{
+    border: 5px solid white; 
+    
+
+}

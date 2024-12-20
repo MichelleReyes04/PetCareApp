@@ -5,16 +5,58 @@
         <title>PetCareApp</title> 
         <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
         <link href="https://fonts.googleapis.com/css2?family=Peralta&display=swap" rel="stylesheet">
+        
      </head>
 <body>
+    <div class="navbar">
+        <div class="title">
+            <span>Pet Care</span>
+            <img src="/static/AdobeStock_532811302.png" alt="Title Image" width="20" height="20">
+        </div>
+        <div class="Links">
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('care_cost_support') }}">Care Cost Support</a></li>
+                <li><a href="{{ url_for('about') }}">About</a></li>
+                
+            </ul>
+        </div>
+    </div>
+
+    <br><br>
+    <br><br><br><br><br><br>
     <div class = "container"> <!-- Container which contains the prompt and response-->
         <br>
         <br>
+
         <div class = "box_one">
-            
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
              <div class = "title" > PET PLAN </div>
             </div>
-       
+       <br>
+       <br>
+       <br>
+       <br>
+       <br>
+       <br>
+       <br>
+       <br>
+       <br>
+       <br>
         <div class = "direction">
                   
             <h3>How it works:</h3> 
@@ -43,6 +85,7 @@
                 <label for="petInfo"><div class = "starter">Enter Here:</div></label> 
             
                 <br>
+
                 <!--Prompt User for response-->
                 <div class = "box"><textarea id="petInfo" rows="10" cols="50" placeholder="E.g., I have a dog who is a mixed Husky and she broke her leg, can you create a week schedule for her?"></textarea></div>
                 <br>
@@ -73,27 +116,47 @@
             </div>
         <br>
         <br>
-        <br>
-        <br>
-        <br>
-        <br>
-
+        
+        
         <!--Clear Button-->
          
 
             <div class = "clearbutton">
                 <button type = "button" id = "clearBtn">Clear</button>
             </div>
+            <br>
+            <br>
+            <br>
         </div>
-
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
     </div>
+
     <!--Modal Interface for response-->
-    
+   
     <div id = "myModal" class="modal">
         <div class = "modal-content">
             <span class = "close">&times;</span>
             <pre id = "modalResponse"></pre>
         </div>
+        
     </div>
 
 

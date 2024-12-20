@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_about.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Peralta&display=swap" rel="stylesheet">
+    
+</head>
+<body>
+    <div class="navbar">
+        <div class="title">
+            <span>Pet Care</span>
+            <img src="/static/AdobeStock_532811302.png" alt="Title Image" width="20" height="20">
+        </div>
+        <div class="Links">
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('index') }}">Pet Plan</a></li>
+                <li><a href="{{ url_for('care_cost_support') }}">Care Cost Support</a></li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class = "about_container">
+    <div class = "about_title">
+        <center>About</center>
+    </div>
+    <br>
+    <br>
+    <div class = "about_summary">
+        <span>
+       <center>Hello! I am Michelle Reyes, the creator of Pet Care! The inspiration for this website began when I welcomed Rocky, the kitten you see below, into my life.
+
+        Growing up with dogs, I was well-versed in their care—feeding, training, and grooming came naturally to me. However, Rocky's arrival posed new challenges: "What do kittens eat?" and "How often should I bathe them?" These questions ultimately sparked the idea for Pet Care.
+        
+        
+        Pet Care offers a faster and more accessible method for receiving personalized pet care advice, eliminating the need for frequent vet visits.
+    </center>
+    </span>
+        <br>
+        <br>
+        <center><img src="/static/IMG_3743.jpg" class= "borded-image" alt="Title Image" width="400" height="400" ></center>
+    <br>
+    <br>
+    </div>
+</div>
+
+<br>
+<br>
+</body>
+</html>

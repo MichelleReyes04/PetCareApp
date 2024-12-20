@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_zero.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=DynaPuff&display=swap" rel="stylesheet">
+    <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js"></script> 
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="title">
+            <span>Pet Care</span>
+            <img src="/static/AdobeStock_532811302.png" alt="Title Image" width="20" height="20">
+        </div>
+        <div class="Links">
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('index') }}">Pet Plan</a></li>
+                <li><a href="{{ url_for('care_cost_support') }}">Care Cost Support</a></li>
+                <li><a href="{{ url_for('about') }}">About</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <br><br><br><br><br>
+
+    <div class="Text_container">
+        
+        <div class="title">
+            Welcome to Pet Care!
+        </div>
+        <br>
+        <div class="welcome-speech">
+            Pet Care is your ultimate companion to help ensure your beloved pet lives a happy life. 
+            Our web application aids you in creating personalized weekly schedules for grooming, feeding, 
+            and training tailored to your pet's specific needs. Additionally, we assist in locating financial support 
+            and aid within your local area.
+        </div>
+        <br><br><br>
+        <div class="get_started_button">
+            <button class="custom_button" onclick="scrollToSection('second-container');">
+                Get Started
+            </button>
+        </div>
+        <br><br><br><br>
+    </div>
+
+    <br><br><br><br><br><br><br>
+
+    <div id="second-container" class="second_container">
+        <div class="box_one">
+            <h2>Pet Plan</h2>
+            Pet Plan creates weekly schedules to meet your pet’s unique requirements. These schedules encompass a range of topics, such as Feeding, Training, General Care, and Grooming.
+            <br><br><br>
+            <div class="button_one">
+                <a href="{{ url_for('index') }}">
+                    <button class="custom-button">Push</button>
+                </a>
+            </div>
+        </div>
+        <div class="box_two">
+            <h2>Care Cost Support</h2>
+            Care Cost Support is a tool designed to help you find local financial support or aid to meet your pet's needs.
+            <br><br><br><br><br>
+            <div class="button_one">
+                <a href="{{ url_for('care_cost_support') }}">
+                    <button class="custom-button">Push</button>
+                </a>
+            </div>
+        </div>
+        <div class="box_three">
+            <h2>About</h2>
+            Learn more about the history of this web application.
+            <br><br><br><br><br><br>
+            <div class="button_one">
+                <a href="{{ url_for('about') }}">
+                    <button class="custom-button">Push</button>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function scrollToSection(id) {
+            var element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    </script>
+</body>
+</html>
