@@ -1,237 +1,124 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head> <meta charset="UTF-8"> 
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-        <title>PetCareApp</title> 
-        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-        <link href="https://fonts.googleapis.com/css2?family=Peralta&display=swap" rel="stylesheet">
-        
-     </head>
-<body>
-    <div class="navbar">
-        <div class="title">
-            <span>Pet Care</span>
-            <img src="/static/AdobeStock_532811302.png" alt="Title Image" width="20" height="20">
-        </div>
-        <div class="Links">
-            <ul>
-                <li><a href="{{ url_for('home') }}">Home</a></li>
-                <li><a href="{{ url_for('care_cost_support') }}">Care Cost Support</a></li>
-                <li><a href="{{ url_for('about') }}">About</a></li>
-                
-            </ul>
-        </div>
+{% extends "base.html" %}
+
+{% block title %}Pet Care | Pet Plan{% endblock %}
+
+{% block content %}
+<section class="tool-hero">
+    <div>
+        <p class="eyebrow">Personalized weekly routines</p>
+        <h1>Generate a care plan built around your pet.</h1>
+        <p class="hero-text">
+            Tell us about your pet, choose the type of support you want, and receive a care plan
+            you can actually use throughout the week.
+        </p>
     </div>
+    <div class="info-card">
+        <h2>How it works</h2>
+        <ol class="info-list">
+            <li>Describe your pet, their age, breed, health condition, or current needs.</li>
+            <li>Choose a plan focus like feeding, grooming, or training.</li>
+            <li>Generate a personalized weekly routine for the next seven days.</li>
+        </ol>
+    </div>
+</section>
 
-    <br><br>
-    <br><br><br><br><br><br>
-    <div class = "container"> <!-- Container which contains the prompt and response-->
-        <br>
-        <br>
+<section class="tool-grid">
+    <article class="panel-card">
+        <div class="section-heading">
+            <p class="feature-kicker">Step 1</p>
+            <h2>Share your pet's needs</h2>
+        </div>
 
-        <div class = "box_one">
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-             <div class = "title" > PET PLAN </div>
+        <form id="petStatus" class="app-form">
+            <label class="field-label" for="petInfo">Pet details</label>
+            <p class="field-help">Include the type of pet, age, breed, routine, injury, or anything else that matters.</p>
+            <textarea
+                id="petInfo"
+                rows="10"
+                placeholder="Example: I have a mixed Husky who is recovering from a leg injury and needs a gentle weekly routine."
+                required
+            ></textarea>
+
+            <fieldset class="checkbox-group">
+                <legend class="field-label">Plan type</legend>
+                <p class="field-help">Choose one focus area or leave all unchecked for a full general care plan.</p>
+                <label class="choice-pill" for="feeding_checkbox">
+                    <input type="checkbox" id="feeding_checkbox" name="feeding">
+                    <span>Feeding</span>
+                </label>
+                <label class="choice-pill" for="groomimg_checkbox">
+                    <input type="checkbox" id="groomimg_checkbox" name="grooming">
+                    <span>Grooming</span>
+                </label>
+                <label class="choice-pill" for="training_checkbox">
+                    <input type="checkbox" id="training_checkbox" name="training">
+                    <span>Training</span>
+                </label>
+            </fieldset>
+
+            <div class="form-actions">
+                <button id="generatePlanBtn" class="primary-button" type="submit">Generate Plan</button>
+                <button class="secondary-button" type="button" id="clearBtn">Start Over</button>
             </div>
-       <br>
-       <br>
-       <br>
-       <br>
-       <br>
-       <br>
-       <br>
-       <br>
-       <br>
-       <br>
-        <div class = "direction">
-                  
-            <h3>How it works:</h3> 
-           
-             <b>Describe your pet and their needs: </b>Write a description of your pet and any other relevant information. 
-             <br>
-             <br>
-             <b>Choose a Plan Type: </b> Select the checkbox for the type of plan you want.
-             <ul>
-             <li>Feeding</li>
-             <li>Grooming</li>
-             <li>Training</li>
-             <li>General Care (Leave all checkboxes empty)</li> 
-             </ul>
-    
-             <b>Generate the Plan: </b>Press on the "Generate" button to recieve a customized weekly schedule based on your pet's needs.
-            
-    </div>
- <br>
- <br>
-        <div class = "container2">
-            <br>
-            <br>
+        </form>
+    </article>
 
-            <form id="petStatus"> <!--ID/info for each request-->
-                <label for="petInfo"><div class = "starter">Enter Here:</div></label> 
-            
-                <br>
-
-                <!--Prompt User for response-->
-                <div class = "box"><textarea id="petInfo" rows="10" cols="50" placeholder="E.g., I have a dog who is a mixed Husky and she broke her leg, can you create a week schedule for her?"></textarea></div>
-                <br>
-                
-                <div class = "button-container">
-                    <input type="checkbox" id="feeding_checkbox" name="feeding" />
-                    <label for="feeding">Feeding</label>
-                    <input type="checkbox" id="groomimg_checkbox" name="grooming"/>
-                    <label for="grooming">Grooming</label>
-                    <input type="checkbox" id="training_checkbox" name="training"/>
-                    <label for="training">Training</label>
-
-                  </div>
-            
-            <br>
-                <br>
-                <!--Press button to submit the response to the GPT-->
-                <div class = "button" ><button type="submit">Generate</button></div>
-            </form>
-        
-
-            <h2>Pet Care Plan: </h2>
-            <br>
-            <!--Response-->
-            <div class="responseAnswer"> 
-                <button id="openModalBtn" style="display:none;">Open for Answer</button>
-                <pre id="response"></pre>
-            </div>
-        <br>
-        <br>
-        
-        
-        <!--Clear Button-->
-         
-
-            <div class = "clearbutton">
-                <button type = "button" id = "clearBtn">Clear</button>
-            </div>
-            <br>
-            <br>
-            <br>
+    <article class="panel-card response-card">
+        <div class="section-heading">
+            <p class="feature-kicker">Step 2</p>
+            <h2>Your pet care plan</h2>
         </div>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-    </div>
+        <p id="responseStatus" class="response-status">Your customized plan will appear here after you generate it.</p>
+        <pre id="response" class="response-output"></pre>
+    </article>
+</section>
 
-    <!--Modal Interface for response-->
-   
-    <div id = "myModal" class="modal">
-        <div class = "modal-content">
-            <span class = "close">&times;</span>
-            <pre id = "modalResponse"></pre>
-        </div>
-        
-    </div>
+<script>
+    document.getElementById('petStatus').addEventListener('submit', async (e) => {
+        e.preventDefault();
 
+        const petInfo = document.getElementById('petInfo').value;
+        const responseAns = document.getElementById('response');
+        const responseStatus = document.getElementById('responseStatus');
+        const submitButton = document.getElementById('generatePlanBtn');
+        const feedingChecked = document.getElementById('feeding_checkbox').checked;
+        const groomingChecked = document.getElementById('groomimg_checkbox').checked;
+        const trainingChecked = document.getElementById('training_checkbox').checked;
 
+        submitButton.disabled = true;
+        submitButton.textContent = 'Generating...';
+        responseStatus.textContent = 'Building your weekly plan now.';
+        responseAns.textContent = '';
 
+        try {
+            const response = await fetch('/generate-care-plan', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    petInfo,
+                    feeding: feedingChecked,
+                    grooming: groomingChecked,
+                    training: trainingChecked
+                })
+            });
 
+            const data = await response.json();
+            responseAns.textContent = data.generatedPlan || data.error || 'No plan was returned.';
+            responseStatus.textContent = 'Your plan is ready.';
+        } catch (error) {
+            responseStatus.textContent = 'Something went wrong while generating the plan.';
+            responseAns.textContent = 'Please try again in a moment.';
+            console.error(error);
+        } finally {
+            submitButton.disabled = false;
+            submitButton.textContent = 'Generate Plan';
+        }
+    });
 
-
-    <script>
-        //modal 
-        const modal = document.getElementById("myModal"); 
-        const openModalBtn = document.getElementById("openModalBtn"); 
-        const closeModalBtn = document.getElementsByClassName("close")[0]; 
-        const modalResponse = document.getElementById("modalResponse"); 
-        const responseAns = document.getElementById('response'); 
-        
-        // Opens the modal when clicked
-        openModalBtn.onclick = function() 
-         { modal.style.display = "block"; 
-         
-        }; 
-
-        // Closes the modal when clicked
-        closeModalBtn.onclick = function() 
-        { modal.style.display = "none"; 
-
-        }; 
-
-        // Closes the modal when clicking anywhere outside the modal contact area.
-        window.onclick = function(event) {
-             if (event.target == modal) //modal --> checks if the click happened on the entire modal element, which means it likely happened on the background if the 'modal content' itself didn't intercept the clic.
-             { modal.style.display = "none"; } 
-            };
-
-        //form which then the user will submit
-        document.getElementById('petStatus').addEventListener('submit', async (e) => {
-            e.preventDefault(); //prevents the default form submission behavior (reloading)
-
-            const petInfo = document.getElementById('petInfo').value; //retrieves the value entered in the textarea with the ID 'petInfo'
-            const responseAns = document.getElementById('response'); // the response
-            const feedingChecked = document.getElementById('feeding_checkbox').checked;
-            const groomingChecked = document.getElementById('groomimg_checkbox').checked;
-            const trainingChecked = document.getElementById('training_checkbox').checked;
-
-
-            responseAns.textContent = "Generating a Pet Plan ......";
-
-            try { //gets the response from the GPT 
-                const response = await fetch('/generate-care-plan', {
-                    method: 'POST', // sends an asynchronous 'POST' request to the '/generate-care-plan' endpoint
-                    headers: {
-                        'Content-Type': 'application/json', //sets the request header to indicate that the payload is JSON.
-                    },
-
-             body: JSON.stringify({ petInfo, feeding: feedingChecked, grooming:groomingChecked, training: trainingChecked}) //converts to a JSON string and sends it as the request body.
-                });
-
-                const data = await response.json(); //parses the JSON response from the server.
-                modalResponse.textContent= data.generatedPlan; //updates the 'modalResponse' element w/ generated pet plan from the server response (helper.py) 
-                //return jsonify({"generatedPlan": generated_plan})
-                
-                //Makes the button to open the modal visible
-                openModalBtn.style.display = "block";
-            } catch (error) {
-                modalResponse.textContent = "Error generating care plan.";
-                console.error(error);
-            }
-        });
-
-
-
-        const clearBtn = document.getElementById("clearBtn");
-
-        clearBtn.addEventListener("click", function(){
-            location.reload(); //reload the page
-        });
-    </script>
-</body>
-</html>
+    document.getElementById('clearBtn').addEventListener('click', function () {
+        location.reload();
+    });
+</script>
+{% endblock %}

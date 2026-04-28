@@ -1,54 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style_about.css') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Peralta&display=swap" rel="stylesheet">
-    
-</head>
-<body>
-    <div class="navbar">
-        <div class="title">
-            <span>Pet Care</span>
-            <img src="/static/AdobeStock_532811302.png" alt="Title Image" width="20" height="20">
+{% extends "base.html" %}
+
+{% block title %}Pet Care | About{% endblock %}
+
+{% block content %}
+<section class="about-layout">
+    <article class="panel-card about-story">
+        <p class="eyebrow">The story behind the app</p>
+        <h1>Pet Care started with one kitten and a lot of questions.</h1>
+        <p>
+            Hello! I am Michelle Reyes, the creator of Pet Care. The inspiration for this website began when I welcomed
+            Rocky, the kitten you see here, into my life.
+        </p>
+        <p>
+            I grew up with dogs, so feeding, training, and grooming felt familiar. Rocky changed that. Suddenly I was asking
+            new questions about what kittens eat, how often they should be bathed, and what good day-to-day care really looks like.
+        </p>
+        <p>
+            That experience sparked the idea for Pet Care: a faster, friendlier way to get personalized pet care guidance
+            without feeling overwhelmed or needing to start from scratch every time.
+        </p>
+    </article>
+
+    <aside class="panel-card about-photo-card">
+        <img src="{{ url_for('static', filename='IMG_3743.jpg') }}" class="about-photo" alt="Rocky the kitten">
+        <div class="photo-caption">
+            <p class="feature-kicker">Meet Rocky</p>
+            <h2>The kitten who inspired Pet Care</h2>
+            <p>Rocky helped turn everyday pet care questions into the idea for a more helpful, approachable web app.</p>
         </div>
-        <div class="Links">
-            <ul>
-                <li><a href="{{ url_for('home') }}">Home</a></li>
-                <li><a href="{{ url_for('index') }}">Pet Plan</a></li>
-                <li><a href="{{ url_for('care_cost_support') }}">Care Cost Support</a></li>
-            </ul>
-        </div>
-    </div>
-
-
-    <div class = "about_container">
-    <div class = "about_title">
-        <center>About</center>
-    </div>
-    <br>
-    <br>
-    <div class = "about_summary">
-        <span>
-       <center>Hello! I am Michelle Reyes, the creator of Pet Care! The inspiration for this website began when I welcomed Rocky, the kitten you see below, into my life.
-
-        Growing up with dogs, I was well-versed in their care—feeding, training, and grooming came naturally to me. However, Rocky's arrival posed new challenges: "What do kittens eat?" and "How often should I bathe them?" These questions ultimately sparked the idea for Pet Care.
-        
-        
-        Pet Care offers a faster and more accessible method for receiving personalized pet care advice, eliminating the need for frequent vet visits.
-    </center>
-    </span>
-        <br>
-        <br>
-        <center><img src="/static/IMG_3743.jpg" class= "borded-image" alt="Title Image" width="400" height="400" ></center>
-    <br>
-    <br>
-    </div>
-</div>
-
-<br>
-<br>
-</body>
-</html>
+    </aside>
+</section>
+{% endblock %}
