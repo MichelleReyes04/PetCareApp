@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 
 {% block title %}Pet Care | About{% endblock %}
+{% block body_class %}inner-page{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='style_about.css') }}">
+{% endblock %}
 
 {% block content %}
 <section class="about-layout">
@@ -22,7 +27,7 @@
     </article>
 
     <aside class="panel-card about-photo-card">
-        <img src="{{ url_for('static', filename='IMG_3743.jpg') }}" class="about-photo" alt="Rocky the kitten">
+        <img src="{{ url_for('static', filename='my-cat.jpg') }}" class="about-photo" alt="Rocky the kitten">
         <div class="photo-caption">
             <p class="feature-kicker">Meet Rocky</p>
             <h2>The kitten who inspired Pet Care</h2>

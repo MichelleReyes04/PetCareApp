@@ -1,51 +1,66 @@
 {% extends "base.html" %}
 
 {% block title %}Pet Care | Home{% endblock %}
+{% block body_class %}home-page{% endblock %}
 
 {% block content %}
 <section class="hero-panel">
     <div class="hero-copy">
-        <p class="eyebrow">Pet care support that feels simple</p>
-        <h1>Build a better routine for your pet in minutes.</h1>
-        <p class="hero-text">
-            Pet Care helps you generate weekly care plans, discover local financial support,
-            and make everyday pet decisions with more confidence.
-        </p>
-        <div class="hero-actions">
-            <a class="primary-button" href="{{ url_for('index') }}">Build My Pet Plan</a>
-            <button class="secondary-button" type="button" onclick="scrollToSection('features')">Explore Features</button>
+        <div class="hero-heading-row">
+            <div class="hero-heading-copy">
+                <p class="eyebrow">Pet care support that feels simple</p>
+                <h1>Welcome to Pet Care!</h1>
+            </div>
+            <img
+                class="hero-side-image"
+                src="{{ url_for('static', filename='dog-sitting.jpg') }}"
+                alt="A dog and cat together"
+            >
         </div>
-    </div>
-    <div class="hero-card">
-        <h2>What you can do here</h2>
-        <ul class="feature-list">
-            <li>Create a weekly feeding, grooming, training, or general care schedule.</li>
-            <li>Get more tailored guidance based on your pet's age, breed, and current needs.</li>
-            <li>Find local care cost support using your pet details and zip code.</li>
-        </ul>
+        <p class="hero-text">
+            Pet Care is your ultimate companion to help ensure your beloved pet lives a happy life.
+            Our web application helps you create personalized weekly schedules for grooming, feeding,
+            and training, while also helping you locate financial support in your local area.
+        </p>
+        <div class="directions-card">
+            <h2>How to use Pet Care</h2>
+            <ol class="info-list">
+                <li>Choose the feature that best matches what you need help with today.</li>
+                <li>Enter details about your pet so the app can tailor the response.</li>
+                <li>Generate a plan or support list designed around your pet's needs.</li>
+            </ol>
+        </div>
+        <div class="hero-actions">
+            <a class="primary-button" href="{{ url_for('menu.pet_plan_route') }}">Build My Pet Plan</a>
+            <button class="secondary-button" type="button" onclick="scrollToSection('features')">See Features</button>
+            <a class="secondary-button" href="{{ url_for('menu.sign_in_route') }}">Sign in with Google</a>
+        </div>
     </div>
 </section>
 
 <section id="features" class="feature-grid">
     <article class="feature-card">
+        <div class="feature-icon" aria-hidden="true">&#128062;</div>
         <p class="feature-kicker">Plan ahead</p>
         <h2>Pet Plan</h2>
         <p>Generate a weekly care routine that matches your pet's health, habits, and daily needs.</p>
-        <a class="primary-button" href="{{ url_for('index') }}">Open Pet Plan</a>
+        <a class="primary-button" href="{{ url_for('menu.pet_plan_route') }}">Open Pet Plan</a>
     </article>
 
     <article class="feature-card">
+        <div class="feature-icon" aria-hidden="true">&#128153;</div>
         <p class="feature-kicker">Get support</p>
         <h2>Care Cost Support</h2>
         <p>Search for nearby financial help and support options for unexpected care costs.</p>
-        <a class="primary-button" href="{{ url_for('care_cost_support') }}">Find Local Help</a>
+        <a class="primary-button" href="{{ url_for('menu.care_cost_support_route') }}">Find Local Help</a>
     </article>
 
     <article class="feature-card">
+        <div class="feature-icon" aria-hidden="true">&#128049;</div>
         <p class="feature-kicker">Meet the creator</p>
         <h2>About Pet Care</h2>
         <p>Read the story behind the app and how Rocky inspired a more helpful pet care experience.</p>
-        <a class="primary-button" href="{{ url_for('about') }}">Read Our Story</a>
+        <a class="primary-button" href="{{ url_for('menu.about_route') }}">Read Our Story</a>
     </article>
 </section>
 

@@ -1,29 +1,10 @@
-from flask import Flask, request, jsonify, render_template, url_for
-import openai
-import os
+'''
+from flask import jsonify
 
-# Retrieve the OpenAI API key from the environment variable
-openai.api_key = os.getenv("OPENAI_API_KEY")
 
-# Initialize the Flask application
-app = Flask(__name__, static_folder='static')
-
-# Routes for rendering templates
-@app.route('/')
-def home():
-    return render_template('home.html')
-
-@app.route('/main')
-def index():
-    return render_template('main.html')
-
-@app.route('/care_cost_support')
-def care_cost_support():
-    return render_template('care_cost_support.html')
-
-@app.route('/about')
-def about():
-    return render_template('about.html')
+@app.route('/google-login')
+def google_login():
+    return oauth.google.authorize_redirect()
 
 # Route for generating financial plans
 @app.route('/generate-fin-plan', methods=['POST'])
@@ -113,6 +94,5 @@ def generate_care_plan():
         print(f"Error: {str(e)}")
         return jsonify({"error": "Error generating care plan."}), 500
 
-# Runs the Flask application in debug mode
-if __name__ == '__main__':
-    app.run(debug=True)
+'''
+
