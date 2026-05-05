@@ -1,4 +1,4 @@
-from flask import app, url_for, redirect, session
+﻿from flask import url_for, redirect, session
 from utils import oauth
 
 def google_login():
