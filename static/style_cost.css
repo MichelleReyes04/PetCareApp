@@ -13,12 +13,6 @@ body::before {
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: url("AdobeStock_187577407.jpeg"); /* Make sure this path is correct relative to the CSS file */
-    background-size: cover;    /* Ensures the image covers the entire background */
-    background-position: center; /* Centers the background image */
-    background-repeat: no-repeat; /* Prevents the image from repeating */
-    background-attachment: fixed; /* Makes the background image stay fixed when scrolling */
-    filter: opacity(75%);  /* Adjust this value to set your desired opacity */
     z-index: -1;   /* Ensures the background image is behind all other content */
 }
 
@@ -99,12 +93,6 @@ body::before {
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: url("AdobeStock_187577407.jpeg"); /* Make sure this path is correct relative to the CSS file */
-    background-size: cover;    /* Ensures the image covers the entire background */
-    background-position: center; /* Centers the background image */
-    background-repeat: no-repeat; /* Prevents the image from repeating */
-    background-attachment: fixed; /* Makes the background image stay fixed when scrolling */
-    filter: opacity(75%);  /* Adjust this value to set your desired opacity */
     z-index: -1;   /* Ensures the background image is behind all other content */
 
 }

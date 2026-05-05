@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Pet Care | Sign In{% endblock %}
+{% block body_class %}inner-page{% endblock %}
+
+{% block content %}
+<section class="enroll-hero">
+    <div>
+        <p class="eyebrow">Join the Pet Care community</p>
+        <h1>Sign in with Google to get started.</h1>
+        <p class="hero-text">
+            Create your account to access user perks and personalized pet care support.
+        </p>
+
+        <a class="primary-button" href="{{ url_for('auth.google_login_route') }}">
+            Sign in with Google
+        </a>
+        
+    </div>
+</section>
+{% endblock %}
+
